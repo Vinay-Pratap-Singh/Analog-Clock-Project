@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            /* background: linear-gradient(90deg, #edbf69, #e07c24); */
+            background: linear-gradient(90deg, cyan, red);
+        }
+        #clock{
+            margin: 30px auto;
+            width: 450px;
+            height: 450px;
+            background-image: url("./image/clock1.png");
+            background-size: contain;
+            background-repeat:no-repeat;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid black;
+            border-radius: 50%;
+        }
+
+        #hour, #minute, #second, #dot{
+            position: absolute;
+            transform-origin: bottom;
+            background-color: black;
+        }
+
+        #hour{
+            width: 1.2%;
+            height: 20%;
+            top: 30%;
+            border-radius: 50%;
+        }
+        
+        #minute{
+            width: 1.2%;
+            height: 25%;
+            top: 25%;
+            border-radius: 50%;
+        }
+        
+        #second{
+            width: 1.2%;
+            height: 30%;
+            top: 20%;
+            border-radius: 50%;
+        }
+
+        #dot{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        #btn{
+            margin: auto;
+            display: flex;
+        }
+
+        #btn p{
+            padding: 15px 30px;
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .my-btn{
+            padding: 0px 30px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0 50px;
+            cursor: pointer;
+            border: 2px solid cyan;
+            border-radius: 25px;
+            background-color: inherit;
+            color: white;
+            box-shadow: 5px 5px 5px cyan;
+        }
+        
+        #number{
+            color: white;
+        }
+
+        #prev-btn:hover{
+            border: 2px solid yellow;
+            box-shadow: 5px 5px 5px yellow;
+            color: cyan;
+            
+        }
+        
+        #next-btn:hover{
+            border: 2px solid yellow;
+            box-shadow: 5px 5px 5px yellow;
+            color: cyan;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <div id="dot"></div>
+    </div>
+    <div id="btn">
+        <button id="prev-btn" class="my-btn" type="submit">prev</button>
+        <p id="number">1</p>
+        <button id="next-btn" class="my-btn" type="submit">next</button>
+    </div>
+</body>
+
+<script>
+    setInterval(() => {
+    let d = new Date(); 
+    let hr = d.getHours();
+    let min = d.getMinutes();
+    let sec = d.getSeconds();
+    let hr_rotation = 30 * hr + min / 2; 
+    let min_rotation = 6 * min;
+    let sec_rotation = 6 * sec;
+  
+    hour.style.transform = `rotate(${hr_rotation}deg)`;
+    minute.style.transform = `rotate(${min_rotation}deg)`;
+    second.style.transform = `rotate(${sec_rotation}deg)`;
+    }, 1000);
+
+
+    let num = 0;
+    let previous = document.getElementById("prev-btn");
+    previous.addEventListener("click", ()=>{
+        if(number.innerHTML === "1"){
+            num = 6;
+        }
+        else{
+            num = number.innerHTML - 1;
+        }
+        clock.style.backgroundImage = `url(./image/clock${num}.png)`;
+        number.innerHTML = `${num}`;
+    });
+    
+    let nextClick = document.getElementById("next-btn");
+    nextClick.addEventListener("click", ()=>{
+        if(number.innerHTML === "6"){
+            num = 1;
+        }
+        else{
+            num = parseInt(number.innerHTML) + 1;
+        }
+        clock.style.backgroundImage = `url(./image/clock${num}.png)`;
+        number.innerHTML = `${num}`;
+    });
+    
+    
+</script>
+</html>
